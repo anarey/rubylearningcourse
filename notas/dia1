@@ -1,0 +1,123 @@
+Global setup:
+
+ Set up git
+  git config --global user.name "anaRB"
+  git config --global user.email anarey@gmail.com
+      
+
+Next steps:
+
+  mkdir rubylearningcourse
+  cd rubylearningcourse
+  git init
+  touch README
+  git add README
+  git commit -m 'first commit'
+  git remote add origin git@github.com:anarey/rubylearningcourse.git
+  git push -u origin master
+      
+
+Existing Git Repo?
+
+  cd existing_git_repo
+  git remote add origin git@github.com:anarey/rubylearningcourse.git
+  git push -u origin master
+      
+      
+## rvm: herramienta de linea de comando que permite instalar, manejar y trabajar con multiples entornos de Ruby con distintas versiones de librerías, lenguaje y conjuntos de gemas.
+
+* Instalamos: apt-get install ruby-rvm
+* Comproblamos los interpretes disponibles para instalar: rvm list known
+* Instalamos el interprete necesario: rvm install 1.9.3 (En mi caso, instalo el 1.9.2)
+* Indicar que ruby vamos a usar: rvm use 1.9.3
+* Ver la versión que estamos usando: ruby -v
+* Para configurar un intérprete por defecto: rvm --defaut use VERSION
+* Ver versión por defecto: rvm list default
+* Versiones de ruby instaladas: rvm list
+* Elin
+
+anarey@tuxiba:~/Proyectos/rubylearning$ rvm use 1.9.2
+Using /usr/share/ruby-rvm/gems/ruby-1.9.2-p180
+
+anarey@tuxiba:~/Proyectos/rubylearning$ rvm use
+Using /usr/share/ruby-rvm/gems/ruby-1.9.2-p180
+
+anarey@tuxiba:~/Proyectos/rubylearning$ sudo rvm --default use 1.9.2
+Using /usr/share/ruby-rvm/gems/ruby-1.9.2-p180
+
+
+## Me dio errores la instalación, era necesario instalar (Como indicaban en http://cheat.errtheblog.com/s/rvm/):
+
+* Instalar las siguientes dependencias: 
+
+sudo apt-get install git-core git curl file gcc make automake autoconf automake1.9 binutils g++ g++-multilib checkinstall libssl-dev libxslt-dev libxml2-dev libcurl4-openssl-dev libmysql++-dev libpcre3 libpcre3-dev
+
+
+  rvm package install openssl
+  rvm package install readline
+  rvm package install iconv
+rvm install 1.9.2 --with-openssl-dir=$HOME/.rvm/usr --with-readline-dir=$HOME/.rvm/usr --with-iconv-dir=$HOME/.rvm/usr
+
+* Creo que lo definitivo ha sido: http://29a.ch/2011/10/28/rvm-on-ubuntu-11-10
+
+sudo apt-get install ruby-rvm
+# make sure we have $rvm_path
+source /etc/profile
+# don't use ubuntus openssl
+rvm package install openssl
+rvm install 1.9.2 --with-openssl-dir=$rvm_path/usr
+
+
+#Ruby gem: http://bosqueviejo.net/2012/01/02/las-gemas-de-ruby/
+* Una gema es una aplicación o librería de Ruby empequetada.
+Las gemas de Ruby son paquetes de librerías para Ruby que se instalan en el sistema y quedan listas para ser usadas, con un simple require o con mecanismos que aporta el propio sistema de gemas para Ruby.
+
+* RubyGems es una forma estandar de distribuir librerías y aplicaciones en Ruby desde su versión 1.9.X
+* Gestor de paquetes/gemas. 
+* También llamado: gem
+
+* Saber si tienes instalado gem: gem --version
+* Actualizar el sistema de Gemas: gem update --system
+
+* Las gemas que usemos en código a través de un 
+require "rubygems";
+require "json"; han de instalarse previamente: 
+
+Trabajo básico con una gema:
+* Actualizar las gemas disponibles: sudo gem update
+* Instalar una gema: sudo gem install json
+* Sino queremos generar la documentación para ri y rdoc, añadir: --no-ri --no-rdoc
+* Listar las gemas instaladas en el sistema: sudo gem list
+* Buscar: gem search -r json
+
+Ejemplo: 
+anarey@tuxiba:~/Proyectos/rubylearning$ sudo gem install json
+Fetching: json-1.6.5.gem (100%)
+Building native extensions.  This could take a while...
+Successfully installed json-1.6.5
+1 gem installed
+Installing ri documentation for json-1.6.5...
+Installing RDoc documentation for json-1.6.5...
+
+### Heroku:
+
+* Instalamos la gema para trabajar con heroku: sudo install heroku
+* Creamos un nuevo juego de llaves: ssh-keygen -C "anarey@gmail.com" -t rsa
+(Ponerle un nuevo nombre, para no machacar el anterior.)
+
+nvalid gemspec in [/var/lib/gems/1.8/specifications/term-ansicolor-1.0.7.gemspec]: invalid date format in specification: "2011-10-13 00:00:00.000000000Z"
+Invalid gemspec in [/var/lib/gems/1.8/specifications/rubyzip-0.9.6.1.gemspec]: invalid date format in specification: "2012-02-08 00:00:00.000000000Z"
+Enter your Heroku credentials.
+Email: anarey@gmail.com
+Password: 
+Found the following SSH public keys:
+1) github_key.pub
+2) id_rsa.pub
+3) id_rsa_heroku.pub
+Which would you like to use with your Heroku account? 3
+Uploading ssh public key /home/anarey/.ssh/id_rsa_heroku.pub
+
+## Otras notas:
+* Pik is a tool to manage multiple versions of Ruby on Windows. It can be used from the Windows command line (cmd.exe) or Git Bash.
+
+
