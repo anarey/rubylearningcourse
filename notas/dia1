@@ -120,4 +120,7 @@ Uploading ssh public key /home/anarey/.ssh/id_rsa_heroku.pub
 ## Otras notas:
 * Pik is a tool to manage multiple versions of Ruby on Windows. It can be used from the Windows command line (cmd.exe) or Git Bash.
 
+#Bundler Una gema.
+Es un programa que permite la instalación de las dependencias expecificadas en un entorno para el funcionamiento de una aplicación. De esta forma aseguramos que se usen las librerías y versiones de gemas concretas.
 
+http://effectif.com/ruby/automating-bundle-exec
