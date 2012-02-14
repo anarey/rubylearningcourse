@@ -52,15 +52,15 @@ Using /usr/share/ruby-rvm/gems/ruby-1.9.2-p180
 
 sudo apt-get install git-core git curl file gcc make automake autoconf automake1.9 binutils g++ g++-multilib checkinstall libssl-dev libxslt-dev libxml2-dev libcurl4-openssl-dev libmysql++-dev libpcre3 libpcre3-dev
 
+* Instalar openssl, readline e iconv desde rvm (con sudo):
+rvm package install openssl
+rvm package install readline
+rvm package install iconv
 
-  rvm package install openssl
-  rvm package install readline
-  rvm package install iconv
-rvm install 1.9.2 --with-openssl-dir=$HOME/.rvm/usr --with-readline-dir=$HOME/.rvm/usr --with-iconv-dir=$HOME/.rvm/usr
+#Esta linea da eror por ssl: rvm install 1.9.2 --with-openssl-dir=$HOME/.rvm/usr --with-readline-dir=$HOME/.rvm/usr --with-iconv-dir=$HOME/.rvm/usr
 
 * Creo que lo definitivo ha sido: http://29a.ch/2011/10/28/rvm-on-ubuntu-11-10
 
-sudo apt-get install ruby-rvm
 # make sure we have $rvm_path
 source /etc/profile
 # don't use ubuntus openssl
