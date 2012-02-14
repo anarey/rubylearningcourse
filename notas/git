@@ -1,0 +1,43 @@
+# Anotaciones de git
+
+# En github tendremos que crear usuario, juego de claves y añadir el token a la config de github.
+
+http://help.github.com/linux-set-up-git/
+
+# Si da problemas a la hora de hacer un push:
+Agent admitted failure to sign using the key.
+Permission denied (publickey).
+
+Se soluciona haciendo un ssh-add como indican en:
+http://www.baptiste-wicht.com/2010/07/tip-how-to-solve-agent-admitted-failure-to-sign-using-the-key-error/
+
+# Para poder usar (desde aquí) git, he de pasar por un proxy. Uso tsocks para configurarlo# configuracion en /etc/tsock.conf
+# Y luego cuando tenga que subir archivos, inicio el comendo con tsocks.
+
+# Configuracion del repo de git en local:
+
+git config --global user.name "Ana Rey"
+git config --global user.email "anarey@gmail.com"
+git config --global user.token "INTRODUCE AQUI EL TOKENb"
+git config --global user.user "anarey"
+      
+# Clonamos el repo
+git clone git@github.com:anarey/rubylearningcourse.git
+
+# Creamos una referencia para trabajar con el.
+git remote add rubylearning git@github.com:anarey/rubylearningcourse.git
+# Subimos los cambios (previamente commiteados))
+tsocks git push rubylearning
+
+#tsocks git fetch origen
+
+Next steps:
+
+  mkdir rubylearningcourse
+  cd rubylearningcourse
+  git init
+  touch README
+  git add README
+  git commit -m 'first commit'
+  git remote add origin git@github.com:anarey/rubylearningcourse.git
+  git push -u origin master
