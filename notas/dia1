@@ -72,6 +72,9 @@ rvm install 1.9.2 --with-openssl-dir=$rvm_path/usr
 * Una gema es una aplicación o librería de Ruby empequetada.
 Las gemas de Ruby son paquetes de librerías para Ruby que se instalan en el sistema y quedan listas para ser usadas, con un simple require o con mecanismos que aporta el propio sistema de gemas para Ruby.
 
+#Instalar rubygem
+sudo apt-get install rubygems
+
 * RubyGems es una forma estandar de distribuir librerías y aplicaciones en Ruby desde su versión 1.9.X
 * Gestor de paquetes/gemas. 
 * También llamado: gem
