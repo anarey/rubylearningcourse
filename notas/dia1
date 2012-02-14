@@ -104,13 +104,22 @@ Installing RDoc documentation for json-1.6.5...
 
 ### Heroku:
 
-* Instalamos la gema para trabajar con heroku: sudo install heroku
+* Instalamos la gema para trabajar con heroku: sudo gem install heroku
+
+* Nos creamos una carpeta de trabajo y nos configuracion un repo de git que apunta a heroku en esa carpeta:
+git init
+
+* Configuramos la cuenta de git de heroku
+
+git config --local user.name "anarey"
+git config --local user.email "anarey@gmail.com"
+
 * Creamos un nuevo juego de llaves: ssh-keygen -C "anarey@gmail.com" -t rsa
 (Ponerle un nuevo nombre, para no machacar el anterior.)
 
-nvalid gemspec in [/var/lib/gems/1.8/specifications/term-ansicolor-1.0.7.gemspec]: invalid date format in specification: "2011-10-13 00:00:00.000000000Z"
-Invalid gemspec in [/var/lib/gems/1.8/specifications/rubyzip-0.9.6.1.gemspec]: invalid date format in specification: "2012-02-08 00:00:00.000000000Z"
-Enter your Heroku credentials.
+* Enlazamos el juego de claves con heroku:
+heroku keys:add
+
 Email: anarey@gmail.com
 Password: 
 Found the following SSH public keys:
