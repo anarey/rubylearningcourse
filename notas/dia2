@@ -1,10 +1,52 @@
 # Anotaciones del día 2
 
 ## Html5 
-
 doctype permite indicar el tipo de documento. De forma que los navegadores puedan interpretar y procesar mejor el contenido. Muy recomendable.
 
 The doctype for HTML5 is simply <!doctype html>
 
- 
 
+<head>
+    <title>Dosa Diner</title>
+    <meta charset="utf-8">
+  </head>
+
+## CSS
+In computer screens, sans-serif fonts are considered easier to read than serif fonts.
+
+<link rel="stylesheet" href="stylesheets/dosasite.css">
+
+* CSS ha sido declarada como estandar de estilo en HTML5 //Note that CSS has been declared the standard, and default, style for HTML5.
+
+## Javascript
+
+* Lenguaje de scripting estandar en HTML5
+
+Para cada elemento HTMl, el navegador crea un objeto que lo represneta y lo almacena en una estructura de arbol.
+DOM (Document Object Model)
+
+* El código Javascript se empieza a ejecutar después de que la página se ha cargado.
+
+* Javascript interactua con la página web a traves de los objetos DOM: creandolos, modificandolos o elimandolos.
+
+* A través de la API de HTML5 hay acceso a audio, video, dibujo en 2D, almacenamiento local, etc que permiten desarrollar aplicaciones. Esto es posible a través de JAvascript
+
+* Donde colocar Javascript.
+
+- En el <HEAD> entre las etiquetas: <script></script>
+En el HEAD, el codigo javascript se ejecutará en primer lugar, justo después de que se ejecuta el HEAD de la pagina.
+
+ <head>
+    <title>Dosa Diner</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="stylesheets/dosasite.css">
+    <script>
+      alert("Hello Course Participants");
+ </script>
+</head>
+
+- En el <HEAD> a través de un fichero enlazado. 
+
+<script scr="fichero"></script>
+ 
+- En el <BODY> a través de las etiquetas <script> </script> o de ficheros adjuntos. Se ejecutará en el orden que se ejecute el body.	
