@@ -39,3 +39,55 @@ Successfully installed json-1.6.5
 Installing ri documentation for json-1.6.5...
 Installing RDoc documentation for json-1.6.5...
 
+
+############ Del dia 3:
+
+* Creamos una gema.
+* Nos registramos en la web rubygems.org
+
+* Construimos nuestra gema.
+
+gem build my_string_extend_anarey.gemspec 
+  Successfully built RubyGem
+  Name: my_string_extend_anarey
+  Version: 0.0.1
+  File: my_string_extend_anarey-0.0.1.gem
+
+* Obtenemos el fichero:
+my_string_extend_anarey-0.0.1.gem
+
+* Instalamos la gema que acabamos de crear:
+
+sudo gem install ./my_string_extend_anarey-0.0.1.gem
+Successfully installed my_string_extend_anarey-0.0.1
+1 gem installed
+Installing ri documentation for my_string_extend_anarey-0.0.1...
+Installing RDoc documentation for my_string_extend_anarey-0.0.1...
+
+### Errores que he ido teniendo:
+
+## Error 1:
+arey@tuxell:~/proyectos/git/rubylearningcourse/my_string_extend_anarey$ irb --simple-prompt
+>> requite 'heroku'
+NoMethodError: undefined method `requite' for main:Object
+	from (irb):1
+	from :0
+>> exit
+
+http://stackoverflow.com/questions/2261981/gem-which-cannot-find-gem-despite-it-being-installed
+
+con un gem which nombreGema 
+
+gem which heroku
+/var/lib/gems/1.8/gems/heroku-2.20.1/lib/heroku.rb
+
+Solución: rake gemspec
+
+## Error 2:
+Invalid date format in specification: "2011-09 -01 00:00:00.000000000Z"
+
+http://stackoverflow.com/questions/7290575/invalid-date-format-specification-in-gemspec
+
+
+Editamos el fichero indicado y dejamos la fecha solo 
+s.date = %q{2011-10-13 00:00:00.000000000Z} Then delete the 00:00:00.000000000Z part: s.date = %q{2011-10-13}
