@@ -102,6 +102,15 @@ h2, p {
   margin-left: 120px;
 }
 
+# Como centrar una imagen. Otra forma
+
+IMG.displayed {
+	display: block;
+	margin-left: auto;
+	margin-right: auto }
+...
+<IMG class="displayed" src="..." alt="...">
+
 
 
 
@@ -148,4 +157,5 @@ En el HEAD, el codigo javascript se ejecutará en primer lugar, justo después d
 * http://www.cssbasics.com/
 * http://www.w3schools.com/js/
 
-	
+* http://junihh.com/nuevo-esquema-para-una-web-mas-semantica
+* http://www.spanish-translator-services.com/espanol/t/007/center.html
