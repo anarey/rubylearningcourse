@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name        = 'my_string_extendi_anarey'
+  s.name        = 'my_string_extend_anarey'
   s.version     = '0.0.1'
   s.date        = '2012-02-19'
   s.summary     = "String Extend"
