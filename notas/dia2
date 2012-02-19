@@ -11,12 +11,99 @@ The doctype for HTML5 is simply <!doctype html>
     <meta charset="utf-8">
   </head>
 
+
+< !DOCTYPE html>
+<html>
+<head>
+	<title>Título de la página</title>
+</head>
+<body>
+ 
+	<header>
+		<!-- El cabezal del site -->
+	</header>
+ 
+	<nav>
+		<!-- Los enlaces de navegación -->
+	</nav>
+ 
+	<article>
+		<!-- El contenido de la página -->
+	</article>
+ 
+	<footer>
+		<!-- El pié de página con los créditos del autor -->
+	</footer>
+ 
+</body>
+</html>
+
+
+
 ## CSS
 In computer screens, sans-serif fonts are considered easier to read than serif fonts.
 
-<link rel="stylesheet" href="stylesheets/dosasite.css">
+* En el HEAD: <link rel="stylesheet" href="stylesheets/dosasite.css">
+
+*Tipos:
+** ID selector: Estilo que se aplica a un solo elemento.
+
+En HTML: ...id="idnombre"> 
+
+<p id="para1">Hello World!</p>
+
+En CSS: #idnombre{atributo:valor;} 
+
+#para1
+{
+text-align:center;
+color:red;
+} 
+
+Ejemplo: 
+
+<p id="para1">Hello World!</p>
+
+** selector «Class» Estilo que se aplica a un grupo de elemento
+En HTML: ...class="nombreclase"..
+
+<body>
+<h1 class="center">Center-aligned heading</h1>
+<p class="center">Center-aligned paragraph.</p> 
+</body>
+
+En CSS: .nombreClase{....}
+
+.center
+{
+text-align:center;
+}
+
 
 * CSS ha sido declarada como estandar de estilo en HTML5 //Note that CSS has been declared the standard, and default, style for HTML5.
+
+* Comentarios: /*This is a comment*/
+
+* Esquema base: 
+
+body {
+  background-color: #C2A7F2;
+  font-family: sans-serif;
+}
+h1 {
+  color: #2A1959;
+  border-bottom: 2px solid #2A1959;
+}
+h2 {
+  color: #474B94;
+  font-size: 1.2em;
+}
+h2, p {
+  margin-left: 120px;
+}
+
+
+
 
 ## Javascript
 
@@ -49,4 +136,16 @@ En el HEAD, el codigo javascript se ejecutará en primer lugar, justo después d
 
 <script scr="fichero"></script>
  
-- En el <BODY> a través de las etiquetas <script> </script> o de ficheros adjuntos. Se ejecutará en el orden que se ejecute el body.	
+- En el <BODY> a través de las etiquetas <script> </script> o de ficheros adjuntos. Se ejecutará en el orden que se ejecute el body.
+
+### Practicar javascript
+
+### URL de interes:
+
+* http://learningwebdesign.com/
+* http://www.html-5-tutorial.com/
+* http://www.w3schools.com/html/html_primary.asp
+* http://www.cssbasics.com/
+* http://www.w3schools.com/js/
+
+	
