@@ -1,0 +1,13 @@
+# Anotaciones del uso de ruby y enviroment.
+
+* Tener en cuenta que las gemas que puedan estar instaladas en el sistema son distinta a la que instalemos a traves de rvm.
+
+* Para utilizar lo instalado anteponer rvm. Por ejemplo: rvm gem list
+
+arey@tuxell:~$ rvm gem list
+
+*** LOCAL GEMS ***
+
+my_string_extend_anarey (0.0.1)
+rake (0.9.2.2)
+
