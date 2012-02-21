@@ -11,3 +11,14 @@ arey@tuxell:~$ rvm gem list
 my_string_extend_anarey (0.0.1)
 rake (0.9.2.2)
 
+## Nota: Cada vez que se quiera utilizar el entorno, hay que hacer un 
+rvm use 
+
+
+* Comproblamos los interpretes disponibles para instalar: rvm list known
+* Instalamos el interprete necesario: rvm install 1.9.3 (En mi caso, instalo el 1.9.2)
+* Indicar que ruby vamos a usar: rvm use 1.9.3
+* Ver la versión que estamos usando: ruby -v
+* Para configurar un intérprete por defecto: rvm --defaut use VERSION
+* Ver versión por defecto: rvm list default
+* Versiones de ruby instaladas: rvm list

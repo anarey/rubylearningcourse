@@ -81,7 +81,30 @@ con un gem which nombreGema
 gem which heroku
 /var/lib/gems/1.8/gems/heroku-2.20.1/lib/heroku.rb
 
-Solución: rake gemspec
+Solución: rake gemspec <== NO funcionó.
+
+Solución de verdad: El problema venía por usar distinta plataforma de ruby, es decir, yo tenía instalado la versión buena de ruby a través de rvm y estaba consultando e intentando usar las del sistema. 
+
+EL intentar ejecutar el entorno irb es lo que me estaba dando el problemas. Y como no se puede hacer un «rvm irb» para lanzar la consola de ruby, me creé un archivo .rb y lo ejecuté con un:
+
+rvm ruby gemaprueba.rb
+
+Con un rvm help, te indica los comandos que pueden usar partiendo del entorno de virtualización. Son los siguientes:
+
+repair rake implode benchmark current gemset build rvmrc tests wrapper package reset fetch get docs gemdir tools update debug ruby monitor migrate use disk-usage list gem exec cleanup uninstall remove specs upgrade rubygems srcdir notes install info alias snapshot gemsets
+
+...y más en la web.
+
+### TODO Añadir el comentario sobre la diferencia entre indicar la versión o no.
+
+Por cierto: tener en cuenta que:
+rvm : Ejecuta o instala en todos los entornos.
+rvm 
+
+
+
+¡rvm es tu amigo! :P
+
 
 ## Error 2:
 Invalid date format in specification: "2011-09 -01 00:00:00.000000000Z"
