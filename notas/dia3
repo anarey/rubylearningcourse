@@ -114,3 +114,16 @@ http://stackoverflow.com/questions/7290575/invalid-date-format-specification-in-
 
 Editamos el fichero indicado y dejamos la fecha solo 
 s.date = %q{2011-10-13 00:00:00.000000000Z} Then delete the 00:00:00.000000000Z part: s.date = %q{2011-10-13}
+
+## Publicar una gema en rubygems.
+
+arey@tuxell:~/proyectos/git/rubylearningcourse/my_string_extend_anarey$ tsocks rvm gem push my_string_extend_anarey-0.0.1.gem 
+Enter your RubyGems.org credentials.
+Don't have an account yet? Create one at http://rubygems.org/sign_up
+   Email:   anarey@gmail.com
+Password:   
+Pushing gem to https://rubygems.org...
+Signed in.
+Pushing gem to https://rubygems.org...
+Successfully registered gem: my_string_extend_anarey (0.0.1)
+
