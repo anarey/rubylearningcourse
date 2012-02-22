@@ -45,6 +45,39 @@ Installing RDoc documentation for json-1.6.5...
 * Creamos una gema.
 * Nos registramos en la web rubygems.org
 
+* Estructura para la nueva gema:
+Directorio:
+- my_string_extend_anarey.gemspec
+/lib
+- my_string_extend_anarey.rb
+
+* Contenido de: my_string_extend_anarey.rb
+
+# my_string_extend.rb
+class String
+  def writesize
+    self.size
+  end
+end
+ 
+
+* Contenido de my_string_extend_anarey.gemspec
+Gem::Specification.new do |s|
+  s.name        = 'my_string_extend'
+  s.version     = '0.0.1'
+  s.date        = '2011-10-27'
+  s.summary     = "String Extend"
+  s.description = "The library opens up the String class and adds a method writesize, which returns the size of the string."
+  s.authors     = ["Satish Talim"]
+  s.email       = ["satish@rubylearning.org"]
+  s.homepage    = "http://rubylearning.org/"
+  s.files       = ["lib/my_string_extend.rb"]
+end
+
+
+
+
+
 * Construimos nuestra gema.
 
 gem build my_string_extend_anarey.gemspec 
@@ -134,6 +167,13 @@ Enter host password for user 'anarey':
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100    56  100    56    0     0     65      0 --:--:-- --:--:-- --:--:--   103
+
+* Una vez configuradas las credenciales, ya no te pide la pass:
+
+tsocks rvm gem push rl_hiya_ana_rey-0.0.1.gem 
+Pushing gem to https://rubygems.org...
+Successfully registered gem: rl_hiya_ana_rey (0.0.1)
+
 
 * Consultar las gemas remotas disponibles:
 
