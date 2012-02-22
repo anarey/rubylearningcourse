@@ -127,3 +127,18 @@ Signed in.
 Pushing gem to https://rubygems.org...
 Successfully registered gem: my_string_extend_anarey (0.0.1)
 
+* Configurar las credenciales para rubygems:
+
+arey@tuxell:~/proyectos/git$ curl -u anarey https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials
+Enter host password for user 'anarey':
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    56  100    56    0     0     65      0 --:--:-- --:--:-- --:--:--   103
+
+* Consultar las gemas remotas disponibles:
+
+gem list -r my_string_extend
+
+
+
+
