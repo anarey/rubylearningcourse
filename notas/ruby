@@ -22,3 +22,11 @@ rvm use
 * Para configurar un intérprete por defecto: rvm --defaut use VERSION
 * Ver versión por defecto: rvm list default
 * Versiones de ruby instaladas: rvm list
+
+# rak
+# rakee
+rake - a ruby build program with capabilities similar to make
+
+# gem build:
+The build command is used by developers to package their Ruby software
+into a single gem file that can be distributed. 

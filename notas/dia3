@@ -29,6 +29,10 @@ Trabajo básico con una gema:
 * Sino queremos generar la documentación para ri y rdoc, añadir: --no-ri --no-rdoc
 * Listar las gemas instaladas en el sistema: sudo gem list
 * Buscar: gem search -r json
+* Checkear una gema en busca de errore: $ gem check -v pkg/rake-0.4.0.gem 
+* Ver dependencias de una gema: gem dependency rails -v 0.10.1
+
+http://docs.rubygems.org/read/chapter/10
 
 Ejemplo:
 anarey@tuxiba:~/Proyectos/rubylearning$ sudo gem install json
@@ -178,6 +182,15 @@ Successfully registered gem: rl_hiya_ana_rey (0.0.1)
 * Consultar las gemas remotas disponibles:
 
 gem list -r my_string_extend
+
+### Referencias:
+
+http://blog.segment7.net/2010/11/15/how-to-name-gems
+http://rubylearning.com/blog/2010/10/06/gem-sawyer-modern-day-ruby-warrior/
+http://guides.rubygems.org/make-your-own-gem/
+http://guides.rubygems.org/rubygems-org-api/#gem
+
+http://docs.rubygems.org/read/chapter/3
 
 
 

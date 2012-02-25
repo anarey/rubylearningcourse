@@ -1,0 +1,50 @@
+# Notas día 4: Understanding HTTP concepts
+
+Con forme se va mostrando la pagina web en el navegador, se van realizando las peticiones necesarias, por ejemplo, mostrar una imagen.
+
+* Un recurso es un fragmento de información que puede ser identificado por una url. Ejemplo: imagen, fichero, etc
+
+Metodo GET: 
+* El método más común, «dame este recurso» 
+* Para referirse a el siempre en mayusculas
+
+Ejemplo de petición: GET /path/to/file/index.html HTTP/1.1
+
+Es la parte de la URL después del dominio. 
+
+# Metodo POST:
+* Una petición POST es usada para enviar informaicón al servidor para ser procesada de alguna forma.
+* La petición URI no es un recurso. Será necesario un programa para manejar la información.
+* Una petición HTTP es normalmente la salida de un programa, no un fichero estático.
+
+# Metodo PUT
+Una petición PUT sube un documento desde el cliente al servidor HTTP destino
+
+#Metodo DELETE
+
+A DELETE request deletes a resource (or makes it unavailable) for future references.
+
+# cURL
+
+* Herramienta de linea de comando para crear peticiones HTTPs
+es automatizar transferencias de archivos o secuencias de operaciones no supervisadas. Es por ejemplo una buena herramienta para simular las acciones de un usuario en un navegador web.
+
+curl -I http://www.twitter.com ## Muestra una la respuesta HTTP a una petición 
+
+## Codigos de respuesta HTML:
+* Indican el estado del servidor. Va incluido en las respuesta a una petición.
+$ curl --head www.satishtalim.com
+  HTTP/1.1 200 OK
+
+* HTTP/1.1 200 OK
+* HTTP/1.1 301 Moved Permanently
+
+-d para mandar datos a través del metodo post sobre la url que da la respuesta a la petición.
+
+curl -d 'str=this is my sentence for day4 in Understanding HTTP concepts' http://sinatra2.hectorsq.com/reverse
+<h1>String Reverse Results</h1> 
+ 
+<p>You had entered the string - this is my sentence for day4 in Understanding HTTP concepts</p> 
+<p>The reversed string is     - stpecnoc PTTH gnidnatsrednU ni 4yad rof ecnetnes ym si siht</p> 
+ 
+<p>Click <a href="http://sinatra2.hectorsq.com/">here</a> to try a new string.</p>
