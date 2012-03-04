@@ -1,0 +1,50 @@
+# Notas del dia 5. net/http library
+
+La biblioteca net/http ofrece un simple cliente para extraer las cabeceras y contenido de las paginas web que utilizan protocolos http y HTTPS
+
+Net::HTTP diseñado para trabajar con URI. URI::HTTP#host, URI::HTTP#port
+URI::HTTP#request_uri are designed to work with Net::HTTP
+
+Net::HTTP.get_response(uri) 
+
+Net::HTTP.get(uri).
+
+Metodo: Net::HTTP.start  abre conexiones TCP y sesiones HTTP
+
+## URI
+Clase de Ruby que permite parsear una URL
+
+## open-uri: 
+Librería estandar de Ruby que envuelve las funcionalidades de net/http, net/https, and net/ftp en un paquete, permitiendo un trato de ellas, como si se tratase de un archivo local.
+
+Ejemplo:
+
+require 'open-uri'
+f = open('http://rubylearning.com/data/text.txt')
+puts f.readlines.join
+
+## Hpricot
+Biblioteca no estandar, pero muy famosa para analizar HTML.
+Instamos la gema: gem install hpricot
+
+page = Hpricot(open('http://rubylearning.com'))
+puts "Page title is: " + page.at(:title).inner_html
+
+## Nokogiri 
+
+Biblioteca para leer/analizar HTML, XML SAX con la habilidad de buscar contenido a través de etiquetas css3 o xpath
+Util para hacer scrapping
+
+# nokogiri_demo2.rb
+require 'nokogiri'
+require 'open-uri'
+doc = Nokogiri::HTML(open("http://rubylearning.com/"))
+
+# Search with XPath
+puts doc.xpath("//h2[@id='slogan']").first.content
+# output: "Helping Ruby Programmers become Awesome!"
+
+# Search with CSS3
+puts doc.css("#footer p strong:first-child")[0].content
+# output: "RubyLearning.com - A Ruby Tutorial"
+
