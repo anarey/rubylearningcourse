@@ -1,0 +1,18 @@
+## Rask: 
+- En Rask están basados la mayoría de los nuevos Framework de Ruby
+- Tiene una interfaz común entre servidor y aplicaciones web
+* Es como un adaptador universal para aplicaciones web
+
+## Sinatra:
+* es basicamente, una librería de ayuda para rack para hacer fácil los despliegues de aplicaciones, además de consistentes y flexibles.
+
+* Es un framework de desarrollo de aplicaciones web como Ruby on Rails, Merb, Nitro, Camping, Rango
+
+* Pequeño, flexible.
+* No es modelo-vista-controlador, foco en la "rápida creación de aplicaciones web en Ruby con el mínimo esfuerzo."
+* Depende de rack
+* Es como un adaptador universal para aplicaciones webi
+
+http://rack.rubyforge.org/
+http://gomix.fedora-ve.org/projects/ruby/wiki/Rack
+http://www.sinatrarb.com/intro-es.html
