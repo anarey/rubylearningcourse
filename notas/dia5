@@ -1,4 +1,4 @@
-# Notas del dia 5. net/http library
+ Notas del dia 5. net/http library
 
 La biblioteca net/http ofrece un simple cliente para extraer las cabeceras y contenido de las paginas web que utilizan protocolos http y HTTPS
 
@@ -34,6 +34,16 @@ puts "Page title is: " + page.at(:title).inner_html
 
 Biblioteca para leer/analizar HTML, XML SAX con la habilidad de buscar contenido a través de etiquetas css3 o xpath
 Util para hacer scrapping
+
+# nokogiri requirements
+sudo apt-get install libxslt-dev libxml2-dev
+sudo gem install nokogiri
+
+xpath: 
+* XPath (XML Path Language) es un lenguaje que permite construir expresiones que recorren y procesan un documento XML.
+*  La idea es parecida a las expresiones regulares para seleccionar partes de un texto sin atributos (plain text). 
+XPath permite buscar y seleccionar teniendo en cuenta la estructura jerárquica del XML. 
+XPath fue creado para su uso en el estándar XSLT, en el que se usa para seleccionar y examinar la estructura del documento de entrada de la transformación.
 
 # nokogiri_demo2.rb
 require 'nokogiri'

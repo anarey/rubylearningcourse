@@ -1,0 +1,561 @@
+<html>
+<head>
+<title>Programming for the Web with Ruby</title>
+<meta charset="utf-8">
+<meta name="author" content="Satish Talim" >
+<meta name="keywords" content="programming, Ruby, Rack, Sinatra" >
+<meta name="description" content="A Ruby programming tutorial on topics that hopefully will help those that have some knowledge of Ruby programming to get started with web programming." >
+<link rel="stylesheet" href="stylesheets/intruby.css">
+</head>
+<body>
+<div>
+      <p>
+        <strong>
+        <a href="chapter2.html">&lt;Chapter 2 | </a>
+        <a href="toc.html">TOC | </a>
+        <a href="chapter4.html">Chapter 4&gt;</a>
+        </strong>
+      </p>
+<h1 class="title">Day 3</h1>
+<h2>Understanding HTTP concepts</h2>
+
+<p>When building web applications, a basic understanding of HTTP is mandatory. Here we try to introduce the basics, without overwhelming you.</p>
+
+<h3>What's HTTP?</h3>
+
+<p>HTTP means HyperText Transfer Protocol. A protocol is just a convention for computer dialogs. It assumes that the computers participating in the conversation have a way of sending messages to each other.</p>
+
+<p>HTTP uses a simple conversation pattern: the client connects to the server, initiates the dialog by asking the server for something, the server then tries to provide the client with an answer (back).</p>
+
+<p>An example of a simple HTTP request and response would be the client asking "give me the file A" and the server answering "I have it, here is the content of file A: (...content of file A...)".</p>
+
+<p>But in reality the protocol uses its own simplified language which looks more like "GET /fileA" answered by "200 OK (...content of file A...)".</p>
+</div>
+
+<div style="width:image 560 px; font-size:80%; text-align:center;"><img src="images/HTTP1.jpg" alt="HTTP" width="560" style="padding-bottom:0.5em;" /><br />HTTP</div>
+
+<div>
+
+<p>The basic principle of HTTP, and the Web in general, is that every resource (such as a web page) available on the Web has a distinct Uniform Resource Locator (URL), and that web clients can use HTTP verbs such as <code>GET</code>, <code>POST</code>, <code>PUT</code>, and <code>DELETE</code> to retrieve or otherwise manipulate those resources.</p>
+
+<h4>Loading a web page</h4>
+
+<p>When a browser loads a web page, it does a <code>GET</code> request for the specified URL. The content of the page is usually in a special markup format called HTML that allows links, images and various style effects.</p>
+
+<p>The browser analyses the HTML in order to display it to the user. But doing so, it may find that it needs more content to render the page correctly, like images.</p>
+
+<p>When that happens, the browser initiates one HTTP request for each image.</p>
+
+<p>When all the necessary information is downloaded, it is combined into the page the user sees on his screen.</p>
+</div>
+
+<div style="width:image 560 px; font-size:80%; text-align:center;"><img src="images/HTTP2.jpg" alt="HTTP" width="560" style="padding-bottom:0.5em;" /><br />HTTP</div>
+
+<div>
+<h3>HTTP request methods (verbs)</h3>
+
+<h4>GET</h4>
+
+<p>A resource is some chunk of information that can be identified by a URL (it's the R in URL - Uniform Resource Locator). The most common kind of resource is a file, but a resource may also be a dynamically-generated query result, a document that is available in several languages, or something else.</p>
+
+<p><code>GET</code> is the most common HTTP method; it says "give me this resource". Method names are always uppercase.</p>
+
+<p>A typical request looks like this:</p>
+<pre>GET /path/to/file/index.html HTTP/1.1
+</pre>
+
+<p>The path is the part of the URL after the host name, also called the request URI (a URI is like a URL, but more general).</p>
+
+<p>The HTTP version always takes the form "HTTP/x.x", uppercase.</p>
+
+<h4>POST</h4>
+
+<p>A <code>POST</code> request is used to send data to the server to be processed in some way. A <code>POST</code> request is different from a <code>GET</code> request in the following ways:</p>
+<ul>
+<li>There's a block of data sent with the request, in the message body.</li>
+<li>The request URI is not a resource to retrieve; it's usually a program to handle the data you're sending.</li>
+<li>The HTTP response is normally program output, not a static file.</li>
+</ul>
+
+<h4>PUT</h4>
+
+<p>A <code>PUT</code> request uploads a document from either the local file system or a remote HTTP server to the destination HTTP server.</p>
+
+<h4>DELETE</h4>
+
+<p>A <code>DELETE</code> request deletes a resource (or makes it unavailable) for future references.</p>
+
+<h3>Using cURL</h3>
+
+<p><strong>cURL</strong> is available on many platforms, including Windows (all variants), OSX (all versions) and Linux (all distros). cURL is available from the cURL website at <a href="http://curl.haxx.se/">http://curl.haxx.se/</a>. Note that when you installed the Bash shell curl was also installed.</p>
+
+<p>To  install  cURL  on  Linux,  you  should  first  check  for  cURL  binaries  in  your  distributions package repository. For exact instructions on how to do this, refer to your distribution's documentation. On Ubuntu and other Debian variants, you can install cURL by issuing the following command:</p>
+
+<pre>$ sudo apt-get install curl
+</pre>
+
+<p>If you are using the Homebrew package manager on OSX, cURL can simply be installed like this:</p>
+
+<pre>$ brew install curl
+</pre>
+
+<p>If cURL is not available in your distribution's package repository or you're running another operating system, you can find the right cURL package by following the download wizard at <a href="http://curl.haxx.se/dlwiz/">http://curl.haxx.se/dlwiz/</a>. Simply select the "curl executable" option, input information about your computer and operating system and it will direct you to the correct file download. Once downloaded, extract any files in the archive to an easily accessible file (for example, c:\cURL on Windows).</p>
+
+<p>cURL is a command-line tool that can issue HTTP requests. This means it is run from the command prompt (in Windows) or terminal (in Linux or OSX) and its results are displayed in the terminal window. There is no graphical interface. So to use cURL, you first have to open a command-line window.</p>
+
+<p>On Windows, go to Start -> Run and enter "cmd" (without quotes) into the dialog and press enter.</p>
+
+<p>On OSX, open the Terminal application. You'll find this in the Applications/Utilities folder.</p>
+
+<p>On Linux, open a Bash Prompt or Terminal window. Again, since all distributions are different, refer to your distributions documentation for more detailed information. On Ubuntu, you can open a bash prompt by going to Applications -> Accessories -> Terminal.</p>
+
+<p>Though Windows, OSX and Linux all run different command-line shells (the program that interprets commands on the terminal and runs executables), the commands presented here will work on all of them.</p>
+
+<p>First, change the directory to where you extracted the cURL archive. If you installed cURL using an installer or a package on Linux, cURL will already be in your path (meaning it can be run even though you're not in the same directory) so this isn't needed. For example, if I placed cURL in C:\cURL on my Windows computer, I would issue the following command.</p>
+<pre>cd c:\cURL
+</pre>
+
+<p>You can now issue cURL commands. On Linux or OSX, you may have to prepend ./ to your commands. For example, instead of <code>curl http://some/url</code>, the command you'd use would be <code>./curl http://some/url</code>.</p>
+
+<p>To test cURL, enter the following command:</p>
+<pre>curl -I http://twitter.com/
+</pre>
+
+<p>You should see HTTP response headers. The first line should be "HTTP/1.1 200 OK." This means you've made a successful request to Twitter using cURL.</p>
+
+<p>cURL is a command-line tool. This means it's launched from a command line with a number of switches and parameters. Switches change how the cURL command will act, and begin with the - character. For example, the previous example used the -I switch, which means to display the HTTP response headers only, and not the HTTP response body. Parameters pass information to either a switch, or the cURL command itself. In the previous example, the Twitter URL was a parameter.</p>
+
+<p>Please refer to the following URL for the various options available in cURL: <a href="http://curl.haxx.se/docs/manpage.html">http://curl.haxx.se/docs/manpage.html</a></p>
+
+<h3>HTTP response codes</h3>
+<p>After a client (such as a web browser) sends a request corresponding to one of the HTTP verbs, the web server responds with a numerical code indicating the HTTP status of the response. For example, a status code of 200 means "success", and a status code of 301 means "permanent redirect". With cURL, you can see this directly at, e.g., www.satishtalim.com (where the --head flag prevents curl from returning the whole page). Open a Bash shell and type:</p>
+
+<pre>$ curl --head www.satishtalim.com
+  HTTP/1.1 200 OK
+  .
+  .
+  .
+</pre>
+
+<p>Here satishtalim.com indicates that the request was successful by returning the status 200 OK. In contrast, google.com is permanently redirected (to www.google.com, naturally), indicated by status code 301 (a "301 redirect"):</p>
+<pre>$ curl --head google.com
+  HTTP/1.1 301 Moved Permanently
+  Location: http://www.google.com/
+  .
+  .
+  .
+</pre>
+
+<p>The Internet has become an inescapable part of software development, and Ruby has a significant number of libraries available to deal with the plethora of Internet services available.</p>
+
+<h2>cURL Exercise</h2>
+<p>One of RubyLearning's former student, Hector Sansores, has written a <a href="http://sinatra2.hectorsq.com/">Sinatra program</a> that reverses the text string that you input to his program. Here's a sample output from the program:</p>
+<pre>&lt;p&gt;You had entered the string - satish talim&lt;/p&gt;
+&lt;p&gt;The reversed string is     - milat hsitas&lt;/p&gt;
+</pre>
+<p>The program requires input of the following form: str=string_to_reverse, where string_to_reverse is the string whose characters you want displayed in reverse order. How would you execute this program using cURL? Post your solution in the technical forum.</p>
+
+<h3>net/http library</h3>
+<p>The <a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/net/http/rdoc/index.html">net/http</a> library comes standard with Ruby and provides a simple client to fetch headers and web page contents using the HTTP and HTTPS protocols. The <code>Net::HTTP</code> is designed to work closely with <code>URI</code>. <code>URI::HTTP#host</code>, <code>URI::HTTP#port</code> and <code>URI::HTTP#request_uri</code> are designed to work with <code>Net::HTTP</code>. The <code>URI</code> class is automatically loaded by <code>net/http</code>.</p>
+
+<h4>Using URI</h4>
+<p>Let's write a program <code>neturi1.rb</code> and store it in the folder <code>my_ruby_programs</code>:</p>
+<pre># neturi1.rb
+require 'net/http'
+
+uri = URI('http://rubylearning.com/data/text.txt')
+res = Net::HTTP.get_response(uri)
+puts res.code    # => '200'
+puts res.message # => 'OK'
+
+puts Net::HTTP.get(uri) # => String
+</pre>
+
+<p>This example loads the <code>net/http</code> library and connects to the URL http://rubylearning.com/data/text.txt</p>
+
+<p>The <code>Net::HTTP.get_response(uri)</code> sends a <code>GET</code> request to the target and returns the HTTP response as a <code>Net::HTTPResponse</code> object. The target is specified as (uri). We can use the <code>code</code> and <code>message</code> methods to return the response data.</p>
+
+<p>The <code>Net::HTTP.get(uri)</code> performs an HTTP <code>GET</code> request for <code>text.txt</code>. This file's contents are then returned and displayed. If you load the URL <a href="http://rubylearning.com/data/text.txt">http://rubylearning.com/data/text.txt</a> in your web browser, you'll get the same response as Ruby.</p>
+
+
+<p>The <a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/net/http/rdoc/Net/HTTP.html#method-i-start">Net::HTTP.start</a> method opens a TCP connection and HTTP session. When this method is called with a block, it passes the <code>Net::HTTP</code> object to the block, and closes the TCP connection and HTTP session after the block has been executed.</p>
+
+<p>Let's write a program that uses the <code>start</code>. Let's call it <code>nethttp1.rb</code> and store it in the folder <code>my_ruby_programs</code>:</p>
+<pre># nethttp1.rb
+require 'net/http'
+
+url = URI.parse('http://rubylearning.com/data/text.txt')
+
+Net::HTTP.start(url.host, url.port) do |http|
+  req = Net::HTTP::Get.new(url.path)
+  puts http.request(req).body
+end
+</pre>
+
+<p>The <code>URI</code> class is used to parse the supplied URL. An object is returned whose methods <code>host</code>, <code>port</code>, and <code>path</code> supply different parts of the URL for <code>Net::HTTP</code> to use. Note that in this example you provide two parameters to the main <code>Net::HTTP.start</code> method: the URL's hostname and the URL's port number. The port number is optional, but <code>URI.parse</code> is clever enough to return the default HTTP port number of 80.</p>
+
+<h3>Using open-uri</h3>
+<p><code>open-uri</code> is a standard Ruby library that wraps up the functionality of <code>net/http</code>, <code>net/https</code>, and <code>net/ftp</code> into a single package. With <code>open-uri</code> retrieving a document from the Web becomes much like opening a text file on the local machine.</p>
+
+<pre># netouri.rb
+require 'open-uri'
+
+f = open('http://rubylearning.com/data/text.txt')
+puts f.readlines.join
+</pre>
+<p>As with <code>File::open</code>, <code>open</code> returns an I/O object (technically a <code>StringIO</code> object), and you can use a method such as <code>readlines</code>.</p>
+
+<h3>Using Hpricot</h3>
+<p>The <b>Hpricot</b> library is not part of Ruby but is very popular. Hpricot is a very rich Ruby library designed to make HTML parsing fast, easy, and fun. We'll only scratch the surface here.</p>
+<p>To install Hpricot, open a new command window and type:</p>
+<pre>$ gem install hpricot
+</pre>
+
+<p>Hpricot can work directly with <code>open-uri</code> to load HTML from remote files.</p>
+
+<pre># nethpcot.rb
+require 'open-uri'
+require 'hpricot'
+
+page = Hpricot(open('http://rubylearning.com'))
+puts "Page title is: " + page.at(:title).inner_html
+</pre>
+
+<h3>Using Nokogiri</h3>
+<p><b>Credit:</b> <a href="https://github.com/otobrglez">Oto Brglez</a></p>
+<p>Another library worth looking into is <a href="http://nokogiri.org/">Nokogiri</a>. Nokogiri is a <a href="http://www.wikipedia.org/wiki/HTML">HTML</a>, <a href="http://www.wikipedia.org/wiki/XML">XML</a>, <a href="http://www.wikipedia.org/wiki/XML#Simple_API_for_XML_.28SAX.29">SAX</a> parser/reader with the ability to search documents via <a href="http://www.wikipedia.org/wiki/XPath">XPath</a> or <a href="http://www.wikipedia.org/wiki/CSS3#CSS_3">CSS3</a> selectors. In short, it's a great library that serves virtually all of your HTML scraping needs. Learning to web scrape allows you to gather, in an automated fashion, freely available data in virtually any kind of online format.</p>
+
+<p>You can install Nokogiri with the following command:</p>
+<pre>$ gem install nokogiri
+</pre>
+<p>What <code>open-uri</code> does for us is encapsulate all the work of making a HTTP request into the <code>open</code> method, making the operation as simple as as opening a file on our own hard drive.</p>
+
+<h4>Fetching documents from web</h4>
+<p>You can combine <code>nokogiri</code> with <code>open-uri</code> to fetch documents:</p>
+<pre># nokogiri_demo.rb
+require 'nokogiri'
+require 'open-uri'
+doc = Nokogiri::HTML(open("http://rubylearning.com/"))
+</pre>
+
+<h4>Searching inside HTML documents</h4>
+
+<p>Nokogiri enables you to search documents with XPath or CSS3 selectors:<p>
+<pre># nokogiri_demo2.rb
+require 'nokogiri'
+require 'open-uri'
+doc = Nokogiri::HTML(open("http://rubylearning.com/"))
+
+# Search with XPath
+puts doc.xpath("//h2[@id='slogan']").first.content
+# output: "Helping Ruby Programmers become Awesome!"
+
+# Search with CSS3
+puts doc.css("#footer p strong:first-child")[0].content
+# output: "RubyLearning.com - A Ruby Tutorial"
+</pre>
+
+<h2>Exercise: Using net/http library and URI, open-uri, Hpricot, Nokogiri</h2>
+<p>Using what we have learned here, count and display number of times the word "the" is used on <a href="http://satishtalim.github.com/webruby/chapter3.html">http://satishtalim.github.com/webruby/chapter3.html</a>.<br />Bonus points: Use each of the following for  separate solutions:</p>
+<ul>
+<li>net/http library and URI</li>
+<li>open-uri</li>
+<li>Hpricot</li>
+<li>Nokogiri</li>
+</ul>
+
+      <p>
+        <strong>
+        <a href="chapter2.html">&lt;Chapter 2 | </a>
+        <a href="toc.html">TOC | </a>
+        <a href="chapter4.html">Chapter 4&gt;</a>
+        </strong>
+      </p>
+<div id="footer">
+  <p>&copy; 2006-2012&nbsp;<strong>RubyLearning.org - Programming for the Web with Ruby</strong>&nbsp;&nbsp;Page Updated: 22nd Jan. 2012</p>
+</div>
+
+</div>
+</body>
+</html>
+i<html>
+<head>
+<title>Programming for the Web with Ruby</title>
+<meta charset="utf-8">
+<meta name="author" content="Satish Talim" >
+<meta name="keywords" content="programming, Ruby, Rack, Sinatra" >
+<meta name="description" content="A Ruby programming tutorial on topics that hopefully will help those that have some knowledge of Ruby programming to get started with web programming." >
+<link rel="stylesheet" href="stylesheets/intruby.css">
+</head>
+<body>
+<div>
+      <p>
+        <strong>
+        <a href="chapter2.html">&lt;Chapter 2 | </a>
+        <a href="toc.html">TOC | </a>
+        <a href="chapter4.html">Chapter 4&gt;</a>
+        </strong>
+      </p>
+<h1 class="title">Day 3</h1>
+<h2>Understanding HTTP concepts</h2>
+
+<p>When building web applications, a basic understanding of HTTP is mandatory. Here we try to introduce the basics, without overwhelming you.</p>
+
+<h3>What's HTTP?</h3>
+
+<p>HTTP means HyperText Transfer Protocol. A protocol is just a convention for computer dialogs. It assumes that the computers participating in the conversation have a way of sending messages to each other.</p>
+
+<p>HTTP uses a simple conversation pattern: the client connects to the server, initiates the dialog by asking the server for something, the server then tries to provide the client with an answer (back).</p>
+
+<p>An example of a simple HTTP request and response would be the client asking "give me the file A" and the server answering "I have it, here is the content of file A: (...content of file A...)".</p>
+
+<p>But in reality the protocol uses its own simplified language which looks more like "GET /fileA" answered by "200 OK (...content of file A...)".</p>
+</div>
+
+<div style="width:image 560 px; font-size:80%; text-align:center;"><img src="images/HTTP1.jpg" alt="HTTP" width="560" style="padding-bottom:0.5em;" /><br />HTTP</div>
+
+<div>
+
+<p>The basic principle of HTTP, and the Web in general, is that every resource (such as a web page) available on the Web has a distinct Uniform Resource Locator (URL), and that web clients can use HTTP verbs such as <code>GET</code>, <code>POST</code>, <code>PUT</code>, and <code>DELETE</code> to retrieve or otherwise manipulate those resources.</p>
+
+<h4>Loading a web page</h4>
+
+<p>When a browser loads a web page, it does a <code>GET</code> request for the specified URL. The content of the page is usually in a special markup format called HTML that allows links, images and various style effects.</p>
+
+<p>The browser analyses the HTML in order to display it to the user. But doing so, it may find that it needs more content to render the page correctly, like images.</p>
+
+<p>When that happens, the browser initiates one HTTP request for each image.</p>
+
+<p>When all the necessary information is downloaded, it is combined into the page the user sees on his screen.</p>
+</div>
+
+<div style="width:image 560 px; font-size:80%; text-align:center;"><img src="images/HTTP2.jpg" alt="HTTP" width="560" style="padding-bottom:0.5em;" /><br />HTTP</div>
+
+<div>
+<h3>HTTP request methods (verbs)</h3>
+
+<h4>GET</h4>
+
+<p>A resource is some chunk of information that can be identified by a URL (it's the R in URL - Uniform Resource Locator). The most common kind of resource is a file, but a resource may also be a dynamically-generated query result, a document that is available in several languages, or something else.</p>
+
+<p><code>GET</code> is the most common HTTP method; it says "give me this resource". Method names are always uppercase.</p>
+
+<p>A typical request looks like this:</p>
+<pre>GET /path/to/file/index.html HTTP/1.1
+</pre>
+
+<p>The path is the part of the URL after the host name, also called the request URI (a URI is like a URL, but more general).</p>
+
+<p>The HTTP version always takes the form "HTTP/x.x", uppercase.</p>
+
+<h4>POST</h4>
+
+<p>A <code>POST</code> request is used to send data to the server to be processed in some way. A <code>POST</code> request is different from a <code>GET</code> request in the following ways:</p>
+<ul>
+<li>There's a block of data sent with the request, in the message body.</li>
+<li>The request URI is not a resource to retrieve; it's usually a program to handle the data you're sending.</li>
+<li>The HTTP response is normally program output, not a static file.</li>
+</ul>
+
+<h4>PUT</h4>
+
+<p>A <code>PUT</code> request uploads a document from either the local file system or a remote HTTP server to the destination HTTP server.</p>
+
+<h4>DELETE</h4>
+
+<p>A <code>DELETE</code> request deletes a resource (or makes it unavailable) for future references.</p>
+
+<h3>Using cURL</h3>
+
+<p><strong>cURL</strong> is available on many platforms, including Windows (all variants), OSX (all versions) and Linux (all distros). cURL is available from the cURL website at <a href="http://curl.haxx.se/">http://curl.haxx.se/</a>. Note that when you installed the Bash shell curl was also installed.</p>
+
+<p>To  install  cURL  on  Linux,  you  should  first  check  for  cURL  binaries  in  your  distributions package repository. For exact instructions on how to do this, refer to your distribution's documentation. On Ubuntu and other Debian variants, you can install cURL by issuing the following command:</p>
+
+<pre>$ sudo apt-get install curl
+</pre>
+
+<p>If you are using the Homebrew package manager on OSX, cURL can simply be installed like this:</p>
+
+<pre>$ brew install curl
+</pre>
+
+<p>If cURL is not available in your distribution's package repository or you're running another operating system, you can find the right cURL package by following the download wizard at <a href="http://curl.haxx.se/dlwiz/">http://curl.haxx.se/dlwiz/</a>. Simply select the "curl executable" option, input information about your computer and operating system and it will direct you to the correct file download. Once downloaded, extract any files in the archive to an easily accessible file (for example, c:\cURL on Windows).</p>
+
+<p>cURL is a command-line tool that can issue HTTP requests. This means it is run from the command prompt (in Windows) or terminal (in Linux or OSX) and its results are displayed in the terminal window. There is no graphical interface. So to use cURL, you first have to open a command-line window.</p>
+
+<p>On Windows, go to Start -> Run and enter "cmd" (without quotes) into the dialog and press enter.</p>
+
+<p>On OSX, open the Terminal application. You'll find this in the Applications/Utilities folder.</p>
+
+<p>On Linux, open a Bash Prompt or Terminal window. Again, since all distributions are different, refer to your distributions documentation for more detailed information. On Ubuntu, you can open a bash prompt by going to Applications -> Accessories -> Terminal.</p>
+
+<p>Though Windows, OSX and Linux all run different command-line shells (the program that interprets commands on the terminal and runs executables), the commands presented here will work on all of them.</p>
+
+<p>First, change the directory to where you extracted the cURL archive. If you installed cURL using an installer or a package on Linux, cURL will already be in your path (meaning it can be run even though you're not in the same directory) so this isn't needed. For example, if I placed cURL in C:\cURL on my Windows computer, I would issue the following command.</p>
+<pre>cd c:\cURL
+</pre>
+
+<p>You can now issue cURL commands. On Linux or OSX, you may have to prepend ./ to your commands. For example, instead of <code>curl http://some/url</code>, the command you'd use would be <code>./curl http://some/url</code>.</p>
+
+<p>To test cURL, enter the following command:</p>
+<pre>curl -I http://twitter.com/
+</pre>
+
+<p>You should see HTTP response headers. The first line should be "HTTP/1.1 200 OK." This means you've made a successful request to Twitter using cURL.</p>
+
+<p>cURL is a command-line tool. This means it's launched from a command line with a number of switches and parameters. Switches change how the cURL command will act, and begin with the - character. For example, the previous example used the -I switch, which means to display the HTTP response headers only, and not the HTTP response body. Parameters pass information to either a switch, or the cURL command itself. In the previous example, the Twitter URL was a parameter.</p>
+
+<p>Please refer to the following URL for the various options available in cURL: <a href="http://curl.haxx.se/docs/manpage.html">http://curl.haxx.se/docs/manpage.html</a></p>
+
+<h3>HTTP response codes</h3>
+<p>After a client (such as a web browser) sends a request corresponding to one of the HTTP verbs, the web server responds with a numerical code indicating the HTTP status of the response. For example, a status code of 200 means "success", and a status code of 301 means "permanent redirect". With cURL, you can see this directly at, e.g., www.satishtalim.com (where the --head flag prevents curl from returning the whole page). Open a Bash shell and type:</p>
+
+<pre>$ curl --head www.satishtalim.com
+  HTTP/1.1 200 OK
+  .
+  .
+  .
+</pre>
+
+<p>Here satishtalim.com indicates that the request was successful by returning the status 200 OK. In contrast, google.com is permanently redirected (to www.google.com, naturally), indicated by status code 301 (a "301 redirect"):</p>
+<pre>$ curl --head google.com
+  HTTP/1.1 301 Moved Permanently
+  Location: http://www.google.com/
+  .
+  .
+  .
+</pre>
+
+<p>The Internet has become an inescapable part of software development, and Ruby has a significant number of libraries available to deal with the plethora of Internet services available.</p>
+
+<h2>cURL Exercise</h2>
+<p>One of RubyLearning's former student, Hector Sansores, has written a <a href="http://sinatra2.hectorsq.com/">Sinatra program</a> that reverses the text string that you input to his program. Here's a sample output from the program:</p>
+<pre>&lt;p&gt;You had entered the string - satish talim&lt;/p&gt;
+&lt;p&gt;The reversed string is     - milat hsitas&lt;/p&gt;
+</pre>
+<p>The program requires input of the following form: str=string_to_reverse, where string_to_reverse is the string whose characters you want displayed in reverse order. How would you execute this program using cURL? Post your solution in the technical forum.</p>
+
+<h3>net/http library</h3>
+<p>The <a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/net/http/rdoc/index.html">net/http</a> library comes standard with Ruby and provides a simple client to fetch headers and web page contents using the HTTP and HTTPS protocols. The <code>Net::HTTP</code> is designed to work closely with <code>URI</code>. <code>URI::HTTP#host</code>, <code>URI::HTTP#port</code> and <code>URI::HTTP#request_uri</code> are designed to work with <code>Net::HTTP</code>. The <code>URI</code> class is automatically loaded by <code>net/http</code>.</p>
+
+<h4>Using URI</h4>
+<p>Let's write a program <code>neturi1.rb</code> and store it in the folder <code>my_ruby_programs</code>:</p>
+<pre># neturi1.rb
+require 'net/http'
+
+uri = URI('http://rubylearning.com/data/text.txt')
+res = Net::HTTP.get_response(uri)
+puts res.code    # => '200'
+puts res.message # => 'OK'
+
+puts Net::HTTP.get(uri) # => String
+</pre>
+
+<p>This example loads the <code>net/http</code> library and connects to the URL http://rubylearning.com/data/text.txt</p>
+
+<p>The <code>Net::HTTP.get_response(uri)</code> sends a <code>GET</code> request to the target and returns the HTTP response as a <code>Net::HTTPResponse</code> object. The target is specified as (uri). We can use the <code>code</code> and <code>message</code> methods to return the response data.</p>
+
+<p>The <code>Net::HTTP.get(uri)</code> performs an HTTP <code>GET</code> request for <code>text.txt</code>. This file's contents are then returned and displayed. If you load the URL <a href="http://rubylearning.com/data/text.txt">http://rubylearning.com/data/text.txt</a> in your web browser, you'll get the same response as Ruby.</p>
+
+
+<p>The <a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/net/http/rdoc/Net/HTTP.html#method-i-start">Net::HTTP.start</a> method opens a TCP connection and HTTP session. When this method is called with a block, it passes the <code>Net::HTTP</code> object to the block, and closes the TCP connection and HTTP session after the block has been executed.</p>
+
+<p>Let's write a program that uses the <code>start</code>. Let's call it <code>nethttp1.rb</code> and store it in the folder <code>my_ruby_programs</code>:</p>
+<pre># nethttp1.rb
+require 'net/http'
+
+url = URI.parse('http://rubylearning.com/data/text.txt')
+
+Net::HTTP.start(url.host, url.port) do |http|
+  req = Net::HTTP::Get.new(url.path)
+  puts http.request(req).body
+end
+</pre>
+
+<p>The <code>URI</code> class is used to parse the supplied URL. An object is returned whose methods <code>host</code>, <code>port</code>, and <code>path</code> supply different parts of the URL for <code>Net::HTTP</code> to use. Note that in this example you provide two parameters to the main <code>Net::HTTP.start</code> method: the URL's hostname and the URL's port number. The port number is optional, but <code>URI.parse</code> is clever enough to return the default HTTP port number of 80.</p>
+
+<h3>Using open-uri</h3>
+<p><code>open-uri</code> is a standard Ruby library that wraps up the functionality of <code>net/http</code>, <code>net/https</code>, and <code>net/ftp</code> into a single package. With <code>open-uri</code> retrieving a document from the Web becomes much like opening a text file on the local machine.</p>
+
+<pre># netouri.rb
+require 'open-uri'
+
+f = open('http://rubylearning.com/data/text.txt')
+puts f.readlines.join
+</pre>
+<p>As with <code>File::open</code>, <code>open</code> returns an I/O object (technically a <code>StringIO</code> object), and you can use a method such as <code>readlines</code>.</p>
+
+<h3>Using Hpricot</h3>
+<p>The <b>Hpricot</b> library is not part of Ruby but is very popular. Hpricot is a very rich Ruby library designed to make HTML parsing fast, easy, and fun. We'll only scratch the surface here.</p>
+<p>To install Hpricot, open a new command window and type:</p>
+<pre>$ gem install hpricot
+</pre>
+
+<p>Hpricot can work directly with <code>open-uri</code> to load HTML from remote files.</p>
+
+<pre># nethpcot.rb
+require 'open-uri'
+require 'hpricot'
+
+page = Hpricot(open('http://rubylearning.com'))
+puts "Page title is: " + page.at(:title).inner_html
+</pre>
+
+<h3>Using Nokogiri</h3>
+<p><b>Credit:</b> <a href="https://github.com/otobrglez">Oto Brglez</a></p>
+<p>Another library worth looking into is <a href="http://nokogiri.org/">Nokogiri</a>. Nokogiri is a <a href="http://www.wikipedia.org/wiki/HTML">HTML</a>, <a href="http://www.wikipedia.org/wiki/XML">XML</a>, <a href="http://www.wikipedia.org/wiki/XML#Simple_API_for_XML_.28SAX.29">SAX</a> parser/reader with the ability to search documents via <a href="http://www.wikipedia.org/wiki/XPath">XPath</a> or <a href="http://www.wikipedia.org/wiki/CSS3#CSS_3">CSS3</a> selectors. In short, it's a great library that serves virtually all of your HTML scraping needs. Learning to web scrape allows you to gather, in an automated fashion, freely available data in virtually any kind of online format.</p>
+
+<p>You can install Nokogiri with the following command:</p>
+<pre>$ gem install nokogiri
+</pre>
+<p>What <code>open-uri</code> does for us is encapsulate all the work of making a HTTP request into the <code>open</code> method, making the operation as simple as as opening a file on our own hard drive.</p>
+
+<h4>Fetching documents from web</h4>
+<p>You can combine <code>nokogiri</code> with <code>open-uri</code> to fetch documents:</p>
+<pre># nokogiri_demo.rb
+require 'nokogiri'
+require 'open-uri'
+doc = Nokogiri::HTML(open("http://rubylearning.com/"))
+</pre>
+
+<h4>Searching inside HTML documents</h4>
+
+<p>Nokogiri enables you to search documents with XPath or CSS3 selectors:<p>
+<pre># nokogiri_demo2.rb
+require 'nokogiri'
+require 'open-uri'
+doc = Nokogiri::HTML(open("http://rubylearning.com/"))
+
+# Search with XPath
+puts doc.xpath("//h2[@id='slogan']").first.content
+# output: "Helping Ruby Programmers become Awesome!"
+
+# Search with CSS3
+puts doc.css("#footer p strong:first-child")[0].content
+# output: "RubyLearning.com - A Ruby Tutorial"
+</pre>
+
+<h2>Exercise: Using net/http library and URI, open-uri, Hpricot, Nokogiri</h2>
+<p>Using what we have learned here, count and display number of times the word "the" is used on <a href="http://satishtalim.github.com/webruby/chapter3.html">http://satishtalim.github.com/webruby/chapter3.html</a>.<br />Bonus points: Use each of the following for  separate solutions:</p>
+<ul>
+<li>net/http library and URI</li>
+<li>open-uri</li>
+<li>Hpricot</li>
+<li>Nokogiri</li>
+</ul>
+
+      <p>
+        <strong>
+        <a href="chapter2.html">&lt;Chapter 2 | </a>
+        <a href="toc.html">TOC | </a>
+        <a href="chapter4.html">Chapter 4&gt;</a>
+        </strong>
+      </p>
+<div id="footer">
+  <p>&copy; 2006-2012&nbsp;<strong>RubyLearning.org - Programming for the Web with Ruby</strong>&nbsp;&nbsp;Page Updated: 22nd Jan. 2012</p>
+</div>
+
+</div>
+</body>
+</html>
+
