@@ -2,6 +2,12 @@
 - En Rask están basados la mayoría de los nuevos Framework de Ruby
 - Tiene una interfaz común entre servidor y aplicaciones web
 * Es como un adaptador universal para aplicaciones web
+* Rack provee de una mínima, modular y adaptable interfaz/api para desarrolladores web en ruyby
+* Tiene como objetivo proporcionar una API mínima para la conexión de los servidores web  y framework de Ruby
+* Facilitar el trato de las peticiones HTTP
+(como WEBrick, Mestizo, etc) y Ruby frameworks web (como Rails, Sinatra, etc.)
+
+* A Rack application is a Ruby object (not a class) that responds to call and takes exactly one argument, the environment. 
 
 ## Sinatra:
 * es basicamente, una librería de ayuda para rack para hacer fácil los despliegues de aplicaciones, además de consistentes y flexibles.
